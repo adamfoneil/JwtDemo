@@ -1,0 +1,37 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="alert alert-danger">
+    @TempData["error"]
+</div>
+
+<form asp-page-handler="Login">
+    <div class="d-flex align-items-center">
+        <div>
+            <label>User Name:</label>
+            <input type="text" name="UserName" value="@Model.UserName" class="form-control" />
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" name="Password" value="@Model.Password" class="form-control" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    </div>  
+</form>
+
+<ul>
+    @foreach (var item in Model.Forecast)
+    {
+        <li>@(item.Date): @item.TemperatureF, @item.Summary</li>
+    }
+</ul>
