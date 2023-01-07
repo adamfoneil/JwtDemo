@@ -14,8 +14,8 @@ namespace WeatherService
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.Configure<AuthOptions>(builder.Configuration.GetSection("AuthOptions"));
-            builder.Services.AddScoped<TokenGenerator>();
+            builder.Services.Configure<UserStoreOptions>(builder.Configuration.GetSection("AuthOptions"));
+            builder.Services.AddScoped<UserStore>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -57,7 +57,7 @@ namespace WeatherService
                     ValidateIssuer = false,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = TokenGenerator.GetSecurityKey(builder.Configuration["AuthOptions:JwtSecret"])                   
+                    IssuerSigningKey = UserStore.GetSecurityKey(builder.Configuration["AuthOptions:JwtSecret"])                   
                 };
             });
 

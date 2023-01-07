@@ -1,6 +1,6 @@
 ﻿namespace WeatherService.Models
 {
-    public class AuthOptions
+    public class UserStoreOptions
     {
         public string JwtSecret { get; set; } = default!;
     }

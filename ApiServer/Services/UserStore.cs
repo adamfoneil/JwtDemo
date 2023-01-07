@@ -7,16 +7,16 @@ using System.Text;
 
 namespace SharedServices
 {
-    public class TokenGenerator
+    public class UserStore
     {
         private readonly string _jwtSecret;
 
-        public TokenGenerator(IOptions<AuthOptions> options)
+        public UserStore(IOptions<UserStoreOptions> options)
         {
             _jwtSecret = options.Value.JwtSecret;
         }
 
-        public string GetToken(string userName, string password)
+        public string Login(string userName, string password)
         {
             if (IsValidUser(userName, password))
             {

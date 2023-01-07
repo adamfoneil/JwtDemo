@@ -9,9 +9,9 @@ namespace WeatherService.Controllers
     [AllowAnonymous]
     public class Account : Controller
     {
-        private readonly TokenGenerator _tokenGenerator;
+        private readonly UserStore _tokenGenerator;
 
-        public Account(TokenGenerator tokenGenerator)
+        public Account(UserStore tokenGenerator)
         {
             _tokenGenerator = tokenGenerator;
         }
@@ -21,7 +21,7 @@ namespace WeatherService.Controllers
         {
             try
             {
-                var token = _tokenGenerator.GetToken(userName, password);
+                var token = _tokenGenerator.Login(userName, password);
                 return Ok(token);
             }
             catch (Exception exc)
