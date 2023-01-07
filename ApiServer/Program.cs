@@ -4,9 +4,11 @@ using SharedServices;
 using WeatherService.Models;
 
 namespace WeatherService
-{
+{   
     public class Program
     {
+        const string CorsPolicy = "KnownClient";
+
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -58,6 +60,19 @@ namespace WeatherService
                 };
             });
 
+
+            // help from
+            // https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-7.0
+            // https://essenceofcode.com/2020/02/09/troubleshooting-cors-issues-in-asp-net-web-api/
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(CorsPolicy, policy => policy
+                    .WithOrigins("https://localhost:7177/")
+                    .AllowCredentials()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            });
+
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
@@ -67,9 +82,12 @@ namespace WeatherService
             }
 
             app.UseHttpsRedirection();
-            app.UseAuthentication();
+            app.UseRouting();
+            app.UseCors(CorsPolicy);
+            app.UseAuthentication();            
             app.UseAuthorization();            
             app.MapControllers();
+            
             app.Run();
         }
     }

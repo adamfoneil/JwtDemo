@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Options;
+using SampleClient.Models;
 
 namespace SampleClient
 {
@@ -7,6 +8,8 @@ namespace SampleClient
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.Configure<ServerOptions>(builder.Configuration.GetSection(nameof(ServerOptions)));
 
             builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession(config =>

@@ -35,3 +35,23 @@
         <li>@(item.Date): @item.TemperatureF, @item.Summary</li>
     }
 </ul>
+
+<p>This is meant to trigger a CORS error:</p>
+<button onclick="GetForecast()" class="btn btn-secondary">Get Forecast</button>
+
+<div id="forecast-output">
+
+</div>
+
+
+@section Scripts {
+<script type="text/javascript">
+
+    function GetForecast() {
+        debugger;
+        fetch("@(Model.ApiUrl)WeatherForecast", { credentials: 'include' })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    }
+</script>
+}

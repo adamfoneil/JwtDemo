@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Options;
 using Refit;
 using SampleClient.Interfaces;
+using SampleClient.Models;
 using System.Text;
 using WeatherService;
 
@@ -10,15 +12,17 @@ namespace SampleClient.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly IWeatherClient _api;        
+        private readonly IWeatherClient _api;
+        private readonly ServerOptions _options;
 
         private const string SessionToken = "token";
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(ILogger<IndexModel> logger, IOptions<ServerOptions> options)
         {
-            _logger = logger;            
+            _logger = logger;
+            _options = options.Value;
 
-            _api = RestService.For<IWeatherClient>("https://localhost:7113/", new RefitSettings()
+            _api = RestService.For<IWeatherClient>(_options.BaseUrl, new RefitSettings()
             {
                 AuthorizationHeaderValueGetter = async () =>
                 {
@@ -32,6 +36,8 @@ namespace SampleClient.Pages
                 }
             });
         }
+
+        public string ApiUrl => _options.BaseUrl;
 
         [BindProperty]
         public string UserName { get; set; } = default!;
