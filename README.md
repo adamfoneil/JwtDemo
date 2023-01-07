@@ -31,6 +31,6 @@ To run this with Visual Studio:
 
 - The main Page is [here](https://github.com/adamfoneil/JwtDemo/blob/master/SampleClient/Pages/Index.cshtml) along with its [code behind](https://github.com/adamfoneil/JwtDemo/blob/master/SampleClient/Pages/Index.cshtml.cs).
 
-- A successful login [stores the toke in Session](https://github.com/adamfoneil/JwtDemo/blob/master/SampleClient/Pages/Index.cshtml.cs#L48-L49)
+- A successful login [stores the token in Session](https://github.com/adamfoneil/JwtDemo/blob/master/SampleClient/Pages/Index.cshtml.cs#L48-L49)
 
 - When the page loads, we check if there's a logged in user, then [get the Forecast](https://github.com/adamfoneil/JwtDemo/blob/master/SampleClient/Pages/Index.cshtml.cs#L63-L66) if so.
