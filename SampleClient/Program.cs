@@ -8,8 +8,6 @@ namespace SampleClient
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddHttpClient();
-
             builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession(config =>
             {

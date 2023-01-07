@@ -12,10 +12,4 @@ namespace SampleClient.Interfaces
         [Get("/WeatherForecast")]
         public Task<IEnumerable<WeatherForecast>> GetForecastAsync();
     }
-
-    public class Login
-    {
-        public string UserName { get; set; } = default!;
-        public string Password { get; set; } = default!;
-    }
 }
