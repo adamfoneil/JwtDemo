@@ -7,11 +7,11 @@ namespace WeatherService.Controllers
     [ApiController]
     [Route("[controller]")]
     [AllowAnonymous]
-    public class Account : Controller
+    public class AccountController : Controller
     {
         private readonly UserStore _userStore;
 
-        public Account(UserStore userStore)
+        public AccountController(UserStore userStore)
         {
             _userStore = userStore;
         }
