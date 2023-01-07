@@ -34,3 +34,11 @@ To run this with Visual Studio:
 - A successful login [stores the token in Session](https://github.com/adamfoneil/JwtDemo/blob/master/SampleClient/Pages/Index.cshtml.cs#L48-L49)
 
 - When the page loads, we check if there's a logged in user, then [get the Forecast](https://github.com/adamfoneil/JwtDemo/blob/master/SampleClient/Pages/Index.cshtml.cs#L63-L66) if so.
+
+## Shared Project
+
+The only reason for the Shared project is to have a common [WeatherForecast](https://github.com/adamfoneil/JwtDemo/blob/master/Shared/WeatherForecast.cs) object, used by both Client and Server.
+
+I use linked source rather than a typical project reference in order to leverage shared assets like this. When adding linked elements, use the Visual Studio command Add Existing, but select Add Linked in the File dialog instead of the default Add button.
+
+I could have used project references in both the client and server projects, but I've sort of gotten in the habit of using linked source because that works better with NuGet. NuGet packages are not allowed to have project references, but they can have linked source.
