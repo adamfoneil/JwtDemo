@@ -1,10 +1,7 @@
-using WeatherService.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.JsonWebTokens;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SharedServices;
-using System.Text;
+using WeatherService.Models;
 
 namespace WeatherService
 {
@@ -14,7 +11,7 @@ namespace WeatherService
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.Configure<UserStoreOptions>(builder.Configuration.GetSection("AuthOptions"));
+            builder.Services.Configure<UserStoreOptions>(builder.Configuration.GetSection(nameof(UserStoreOptions)));
             builder.Services.AddScoped<UserStore>();
 
             builder.Services.AddControllers();
@@ -57,7 +54,7 @@ namespace WeatherService
                     ValidateIssuer = false,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = UserStore.GetSecurityKey(builder.Configuration["AuthOptions:JwtSecret"])                   
+                    IssuerSigningKey = UserStore.GetSecurityKey(builder.Configuration["UserStoreOptions:JwtSecret"])                   
                 };
             });
 

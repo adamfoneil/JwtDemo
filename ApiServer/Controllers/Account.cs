@@ -9,11 +9,11 @@ namespace WeatherService.Controllers
     [AllowAnonymous]
     public class Account : Controller
     {
-        private readonly UserStore _tokenGenerator;
+        private readonly UserStore _userStore;
 
-        public Account(UserStore tokenGenerator)
+        public Account(UserStore userStore)
         {
-            _tokenGenerator = tokenGenerator;
+            _userStore = userStore;
         }
 
         [HttpPost]
@@ -21,7 +21,7 @@ namespace WeatherService.Controllers
         {
             try
             {
-                var token = _tokenGenerator.Login(userName, password);
+                var token = _userStore.Login(userName, password);
                 return Ok(token);
             }
             catch (Exception exc)
