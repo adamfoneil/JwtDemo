@@ -67,7 +67,7 @@ namespace WeatherService
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy(CorsPolicy, policy => policy
-                    .WithOrigins("https://localhost:7177/")
+                    .WithOrigins("https://localhost:7177")
                     .AllowCredentials()
                     .AllowAnyHeader()
                     .AllowAnyMethod());
